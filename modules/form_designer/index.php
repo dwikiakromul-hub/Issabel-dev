@@ -159,6 +159,8 @@ function listarFormularios($pDB, $smarty, $module_name, $local_templates_dir)
             "ONCHANGE"              => 'submit();',
         ),
     ));
+
+    
     $oGrid->addFilterControl(
         _tr("Filter applied ")._tr("Status")." = ".$cbo_estados[$cbo_estado],
         $paramFiltro,
@@ -247,6 +249,7 @@ function modificarFormulario($pDB, $smarty, $module_name, $local_templates_dir)
             'TEXT'      =>  _tr('Type Text'),
             'LIST'      =>  _tr('Type List'),
             'DATE'      =>  _tr('Type Date'),
+            'SELECT'      =>  _tr('Type Select'),
             'TEXTAREA'  =>  _tr('Type Text Area'),
             'LABEL'     =>  _tr('Type Label'),
         ), 'TEXT'),
