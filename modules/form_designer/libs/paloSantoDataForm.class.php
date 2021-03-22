@@ -131,6 +131,21 @@ class paloSantoDataForm
                 if (count($enumval) > 0 && $enumval[count($enumval) - 1] == '')
                     array_pop($enumval);
                 $tuplacampo['value'] = $enumval;
+            }else if ($tuplacampo['tipo'] == 'LIST1') {
+                $enumval = explode(',', $tuplacampo['value']);
+                if (count($enumval) > 0 && $enumval[count($enumval) - 1] == '')
+                    array_pop($enumval);
+                $tuplacampo['value'] = $enumval;
+            }else if ($tuplacampo['tipo'] == 'LIST2') {
+                $enumval = explode(',', $tuplacampo['value']);
+                if (count($enumval) > 0 && $enumval[count($enumval) - 1] == '')
+                    array_pop($enumval);
+                $tuplacampo['value'] = $enumval;
+            }else if ($tuplacampo['tipo'] == 'LIST3') {
+                $enumval = explode(',', $tuplacampo['value']);
+                if (count($enumval) > 0 && $enumval[count($enumval) - 1] == '')
+                    array_pop($enumval);
+                $tuplacampo['value'] = $enumval;
             } else {
                 unset($tuplacampo['value']);
             }
@@ -257,7 +272,7 @@ class paloSantoDataForm
         // Clasificar los campos que se envían para actualizar
         $camposRef = array();
         foreach ($formfields as $field) {
-            if (!in_array($field['tipo'], array('TEXT', 'LIST', 'DATE', 'TEXTAREA', 'LABEL'))) {
+            if (!in_array($field['tipo'], array('TEXT', 'LIST', 'LIST1', 'LIST2', 'LIST3', 'DATE', 'TEXTAREA', 'LABEL'))) {
                 $this->errMsg = _tr('Invalid field type');
                 return FALSE;
             }
@@ -266,6 +281,36 @@ class paloSantoDataForm
                 return FALSE;                
             }
             if ($field['tipo'] == 'LIST') {
+                if (!isset($field['value']) || count($field['value']) <= 0) {
+                    $this->errMsg = _tr('Error List is empty');
+                    return FALSE;
+                }
+                $field['value'] = implode(',', $field['value']).',';
+            } else {
+                $field['value'] = '';
+            }
+
+            if ($field['tipo'] == 'LIST1') {
+                if (!isset($field['value']) || count($field['value']) <= 0) {
+                    $this->errMsg = _tr('Error List is empty');
+                    return FALSE;
+                }
+                $field['value'] = implode(',', $field['value']).',';
+            } else {
+                $field['value'] = '';
+            }
+
+            if ($field['tipo'] == 'LIST2') {
+                if (!isset($field['value']) || count($field['value']) <= 0) {
+                    $this->errMsg = _tr('Error List is empty');
+                    return FALSE;
+                }
+                $field['value'] = implode(',', $field['value']).',';
+            } else {
+                $field['value'] = '';
+            }
+
+            if ($field['tipo'] == 'LIST3') {
                 if (!isset($field['value']) || count($field['value']) <= 0) {
                     $this->errMsg = _tr('Error List is empty');
                     return FALSE;

@@ -248,8 +248,10 @@ function modificarFormulario($pDB, $smarty, $module_name, $local_templates_dir)
         'CMB_TIPO'          =>  combo(array(
             'TEXT'      =>  _tr('Type Text'),
             'LIST'      =>  _tr('Type List'),
+            'LIST1'      =>  _tr('Type List Kota'),
+            'LIST2'      =>  _tr('Type List Kecamatan'),
+            'LIST3'      =>  _tr('Type List Kelurahan'),
             'DATE'      =>  _tr('Type Date'),
-            'SELECT'      =>  _tr('Type Select'),
             'TEXTAREA'  =>  _tr('Type Text Area'),
             'LABEL'     =>  _tr('Type Label'),
         ), 'TEXT'),

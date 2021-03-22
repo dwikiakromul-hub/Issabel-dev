@@ -8,11 +8,55 @@
 	{foreach from=$FORMS key=ID_FORM item=FORM}
 	<div id="issabel-callcenter-formulario-{$ID_FORM}">
 		<table border="0" cellpadding="0">
+
 			<tr>
 				<th colspan="2">{$FORM.description|escape:"html"}</th>
 			</tr>
-			{foreach from=$FORM.fields item=FIELD}
 			<tr>
+				<td>Lokasi</td>
+				<td>
+					<select style="width: 100%; height: 100%; margin: 10px;" id="kota" tabindex=""    >
+						<option nama="kota" value="KOTA JAKARTA BARAT">Jakarta Barat</option>
+						<option nama="kota" value="KOTA JAKARTA SELATAN">Jakarta Selatan</option>
+						<option nama="kota" value="KOTA JAKARTA UTARA">Jakarta Utara</option>
+						<option nama="kota" value="KOTA JAKARTA PUSAT">Jakarta Pusat</option>
+						<option nama="kota" value="KOTA JAKARTA TIMUR">Jakarta Timur</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>Kecamatan</td>
+				<td>
+					<select style="width: 100%; height: 100%; margin: 10px;" id="kecamatan" name="kecamatan" onchange="tampilKabupaten()"> </select>
+				</td>
+			</tr>
+			<tr>
+				<td>Kelurahan</td>
+				<td>
+					<select style="width: 100%; height: 100%; margin: 10px;" id="kelurahan" name="kelurahan"> </select>
+				</td>
+			</tr>
+			<tr>
+				<td>Nama</td>
+				<td>
+					<input style="width: 100%; height: 100%; margin: 10px;" type="text" name="nama" />
+				</td>
+			</tr>
+			<tr>
+				<td>Keperluan</td>
+				<td>
+					<input style="width: 100%; height: 100%; margin: 10px;" type="text" name="keperluan" />
+				</td>
+			</tr>
+			<tr>
+				<td>Tanggal</td>
+				<td>
+					<input style="width: 100%; height: 100%; margin: 10px;" type="datepicker" name="tanggal" />
+				</td>
+			</tr>
+
+			{foreach from=$FORM.fields item=FIELD}
+			<tr>				
 				{if $FIELD.type != "LABEL"}
 				<td><label>{$FIELD.label|escape:"html"}: </label></td>
 				{/if}
@@ -21,9 +65,10 @@
 					{html_options
 						name="field-`$ID_FORM`-`$FIELD.id`"
 						id="field-`$ID_FORM`-`$FIELD.id`"
-						class="issabel-callcenter-field ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
+						class=""
 						output=$FIELD.options
 						values=$FIELD.options
+						onchange="tampilKecamatan()"
 						selected=$FIELD.current_value}
 						{elseif $FIELD.type eq "DATE"}
 						{* Depende de ejecutar datepicker sobre .issabel-callcenter-field-date *}
@@ -51,30 +96,6 @@
 						maxlength="{$FIELD.maxsize}"
 						class="issabel-callcenter-field ui-widget-content ui-corner-all"
 						value="{if $FIELD.current_value == ''}{$FIELD.default_value|escape:"html"}{else}{$FIELD.current_value|escape:"html"}{/if}" />
-						<tr>
-							<td>Lokasi</td>
-							<td>
-								<select id="kota" tabindex=""  onchange="tampilKecamatan()"  >
-									<option nama="kota" value="KOTA JAKARTA BARAT">Jakarta Barat</option>
-									<option nama="kota" value="KOTA JAKARTA SELATAN">Jakarta Selatan</option>
-									<option nama="kota" value="KOTA JAKARTA UTARA">Jakarta Utara</option>
-									<option nama="kota" value="KOTA JAKARTA PUSAT">Jakarta Pusat</option>
-									<option nama="kota" value="KOTA JAKARTA TIMUR">Jakarta Timur</option>
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<td>Kecamatan</td>
-							<td>
-								<select id="kecamatan" name="kecamatan" onchange="tampilKabupaten()"> </select>
-							</td>
-						</tr>
-						<tr>
-							<td>Kelurahan</td>
-							<td>
-								<select id="kelurahan" name="kelurahan"> </select>
-							</td>
-						</tr>
 						{/if}
 					</td>
 				</tr>
@@ -104,6 +125,7 @@
 			{
 				document.getElementById("kecamatan").innerHTML="<option value='Gambir'>Gambir</option><option name='kecamatan' value='Menteng'>Menteng</option>";
 			}
+
 			else if (nama_kota=="KOTA JAKARTA SELATAN")
 			{
 				document.getElementById("kecamatan").innerHTML="<option value='Pancoran'>Pancoran</option><option name='kecamatan' value='Jagakarsa'>Jagakarsa</option>";

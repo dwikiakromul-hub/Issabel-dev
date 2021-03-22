@@ -30,6 +30,33 @@ $(document).ready(function() {
 				enumlist.append(opt);
 			}
 			formfield.find('td.formfield_enumval span.formfield_enumval_passive').text(construir_lista_comas(enumlist));
+		}else if (CAMPOS_FORM[i].tipo == 'LIST1') {
+			var enumlist = formfield.find('td.formfield_enumval select.formfield_enumlist_items');
+			for (var j = 0; j < CAMPOS_FORM[i].value.length; j++) {
+				var opt = $('<option></option>')
+					.text(CAMPOS_FORM[i].value[j])
+					.val(CAMPOS_FORM[i].value[j]);
+				enumlist.append(opt);
+			}
+			formfield.find('td.formfield_enumval span.formfield_enumval_passive').text(construir_lista_comas(enumlist));
+		}else if (CAMPOS_FORM[i].tipo == 'LIST2') {
+			var enumlist = formfield.find('td.formfield_enumval select.formfield_enumlist_items');
+			for (var j = 0; j < CAMPOS_FORM[i].value.length; j++) {
+				var opt = $('<option></option>')
+					.text(CAMPOS_FORM[i].value[j])
+					.val(CAMPOS_FORM[i].value[j]);
+				enumlist.append(opt);
+			}
+			formfield.find('td.formfield_enumval span.formfield_enumval_passive').text(construir_lista_comas(enumlist));
+		}else if (CAMPOS_FORM[i].tipo == 'LIST3') {
+			var enumlist = formfield.find('td.formfield_enumval select.formfield_enumlist_items');
+			for (var j = 0; j < CAMPOS_FORM[i].value.length; j++) {
+				var opt = $('<option></option>')
+					.text(CAMPOS_FORM[i].value[j])
+					.val(CAMPOS_FORM[i].value[j]);
+				enumlist.append(opt);
+			}
+			formfield.find('td.formfield_enumval span.formfield_enumval_passive').text(construir_lista_comas(enumlist));
 		} else {
 			formfield.find('td.formfield_enumval > span.formfield_enumval_wrap').hide();
 		}
@@ -52,6 +79,12 @@ $(document).ready(function() {
 		 * tipos de campos deben de ocultarlos. */
 		var formfield = $(this).parents('tr.formfield_row');
 		if ($(this).val() == 'LIST') {
+			formfield.find('td.formfield_enumval > span.formfield_enumval_wrap').show();
+		}else if ($(this).val() == 'LIST1') {
+			formfield.find('td.formfield_enumval > span.formfield_enumval_wrap').show();
+		}else if ($(this).val() == 'LIST2') {
+			formfield.find('td.formfield_enumval > span.formfield_enumval_wrap').show();
+		}else if ($(this).val() == 'LIST3') {
 			formfield.find('td.formfield_enumval > span.formfield_enumval_wrap').show();
 		} else {
 			formfield.find('td.formfield_enumval > span.formfield_enumval_wrap').hide();
@@ -107,6 +140,27 @@ $(document).ready(function() {
 			return;
 		}
 		if (formfield.find('td.formfield_type > select').val() == 'LIST') {
+			if (formfield.find('select.formfield_enumlist_items > option').length <= 0) {
+				formfield.find('input[name="formfield_enumlist_newitem"]').focus();
+				return;
+			}
+		}
+
+		if (formfield.find('td.formfield_type > select').val() == 'LIST1') {
+			if (formfield.find('select.formfield_enumlist_items > option').length <= 0) {
+				formfield.find('input[name="formfield_enumlist_newitem"]').focus();
+				return;
+			}
+		}
+
+		if (formfield.find('td.formfield_type > select').val() == 'LIST2') {
+			if (formfield.find('select.formfield_enumlist_items > option').length <= 0) {
+				formfield.find('input[name="formfield_enumlist_newitem"]').focus();
+				return;
+			}
+		}
+
+		if (formfield.find('td.formfield_type > select').val() == 'LIST3') {
 			if (formfield.find('select.formfield_enumlist_items > option').length <= 0) {
 				formfield.find('input[name="formfield_enumlist_newitem"]').focus();
 				return;
